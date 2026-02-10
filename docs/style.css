@@ -1,134 +1,135 @@
 body {
-    background-color: #2c3e50;
+    background-color: #0f0f0f;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* No scroll at all */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #album-container {
-    width: 1000px;
-    height: 700px;
-    perspective: 2000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 900px; /* Exact spread width */
+    height: 600px;
+    position: relative;
 }
 
 #album {
     width: 900px;
-    height: 630px;
+    height: 600px;
+    touch-action: none;
 }
 
-/* Page styles */
-.page {
-    background-color: #fdfdfd;
-    background-image: radial-gradient(#e5e5e5 0.5px, #fdfdfd 0.5px);
-    background-size: 10px 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    padding: 15px;
+/* Page Styles */
+.page, .hard {
+    width: 450px;
+    height: 600px;
+    background-color: #fff;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    overflow: hidden !important;
+}
+
+/* Hard Cover Styles */
+.hard {
+    background-color: #2c1a1a;
+    background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
+    border: 1px solid #1a0d0d;
+}
+
+.front-side, .back-side {
     display: flex;
     flex-direction: column;
-}
-
-.page-title {
-    font-size: 1.2em;
-    color: #444;
-    text-align: center;
-    margin: 0 0 10px 0;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 5px;
-    font-weight: bold;
-}
-
-.hard {
-    background-color: #2c1a1a; /* Darker Leather */
-    background-image: url('https://www.transparenttextures.com/patterns/black-leather.png');
-    color: #d4af37; /* Gold color */
-    display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    border: 8px solid #1a0f0f;
-    box-shadow: inset 0 0 100px rgba(0,0,0,0.8), 5px 5px 15px rgba(0,0,0,0.5);
-    border-radius: 5px;
+    color: #d4af37;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.inside-side {
+    background-color: #3d2525;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
 }
 
 .cover-content h1 {
-    font-size: 3.5em;
-    margin-bottom: 0.1em;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    font-family: 'Garamond', serif;
+    font-size: 4rem;
+    margin: 0;
+    line-height: 1;
 }
 
-.cover-content p {
-    font-style: italic;
-    font-size: 1.2em;
+.cover-content h2 {
+    font-size: 1.5rem;
+    letter-spacing: 8px;
+    margin: 0 0 20px 0;
 }
 
-/* Grid layout */
+/* Grid & Pockets */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 8px;
-    flex-grow: 1;
-    background-color: rgba(255, 255, 255, 0.4);
+    grid-template-columns: repeat(3, 33.33%);
+    grid-template-rows: repeat(3, 33.33%);
+    width: 100%;
+    height: 560px; /* Filling the height */
     padding: 10px;
-    border-radius: 8px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #e0e0e0 0%, #cfcfcf 100%);
 }
 
 .card-pocket {
-    background-color: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    margin: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    border-radius: 4px;
     position: relative;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1), inset 0 0 5px rgba(255,255,255,0.8);
-    transition: all 0.3s ease;
-}
-
-.card-pocket::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 100%);
-    pointer-events: none;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
 }
 
 .card-pocket img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 94%;
+    max-height: 94%;
     object-fit: contain;
-    transition: transform 0.3s;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
 }
 
-.card-pocket:hover img {
-    transform: scale(1.05);
-}
-
-/* Texture and details */
-.page::before {
-    content: '';
+/* Spine Shadow */
+.page::after {
+    content: "";
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    width: 60px;
     height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%);
     pointer-events: none;
+    z-index: 10;
+}
+
+.odd::after {
+    left: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+}
+
+.even::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+}
+
+.page-title {
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    text-align: center;
+    background: #d4af37;
+    color: #fff;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Fix for turn.js overflow */
+.turn-page {
+    background-color: #fff !important;
 }
